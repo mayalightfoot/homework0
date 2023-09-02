@@ -1,0 +1,51 @@
+---
+title: "Homework 0"
+format: html
+editor: visual
+---
+
+<br />
+
+```{r}
+#| echo: false
+# edit values here:
+
+a <- 1
+b <- 3
+c <- 2
+```
+
+Solve $f(x) = ax^2 + bx + c = 0$ for $a = `r a`,b = `r b`, c = `r c`$
+
+<br />
+
+Solution:
+
+```{r message=FALSE, warning=FALSE}
+#| echo: false
+
+R1 <- (-b + (sqrt(b^2 - 4*a*c))) / (2*a)
+R2 <- (-b - (sqrt(b^2 - 4*a*c))) / (2*a)
+
+graph <- function(a,b,c) {
+  x <- seq(-5, 5, length = 300)
+  plot(x, a*x^2 + b*x + c, type = "l")
+  abline(h = 0, lty = 2)
+}
+ 
+if (is.nan(R1) & is.nan(R2)) {
+  print("There are no real solutions to this equation.")
+  graph(a,b,c)
+  print("Graph confirms result; line does not cross the x-axis.")
+  
+} else if (R1 == R2) {
+  print(paste("x =", R1))
+  graph(a,b,c)
+  print(paste("Graph confirms result; line crosses x-axis once at x =", R1))
+
+} else {
+  print(paste("x =", R1, ",", R2))
+  graph(a,b,c)
+  print(paste("Graph confirms result; line crosses x-axis twice at x =", R1, "and x =", R2))
+}
+```
